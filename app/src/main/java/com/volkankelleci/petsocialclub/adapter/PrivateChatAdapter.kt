@@ -8,16 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.volkankelleci.petsocialclub.R
 import com.volkankelleci.petsocialclub.chatpart.ChatRoomListFragmentDirections
 
-import com.volkankelleci.petsocialclub.util.PrivateMessage
+import com.volkankelleci.petsocialclub.privatemessage.PrivateMessageDataBase
 import com.volkankelleci.petsocialclub.util.UserInfo
 import com.volkankelleci.petsocialclub.util.Util
 import com.volkankelleci.petsocialclub.util.Util.downloadImageToRecycler
-import kotlinx.android.synthetic.main.fragment_private_chat_room.*
 import kotlinx.android.synthetic.main.private_chat_raw.view.*
 
 class PrivateChatAdapter(
     val userList: ArrayList<UserInfo>,
-    val privateMessage: ArrayList<PrivateMessage>,
+    val privateMessage: ArrayList<PrivateMessageDataBase>,
 ) : RecyclerView.Adapter<PrivateChatAdapter.PrivateChatAdapterViewHolder>() {
     class PrivateChatAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

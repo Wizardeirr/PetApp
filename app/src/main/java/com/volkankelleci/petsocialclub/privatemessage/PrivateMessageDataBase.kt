@@ -1,6 +1,6 @@
-package com.volkankelleci.petsocialclub.util
+package com.volkankelleci.petsocialclub.privatemessage
 
-class PrivateMessage(
+class PrivateMessageDataBase(
     var message:String,
     var fromUUID:String,
     var toUUID:String,

@@ -81,7 +81,7 @@
     </fragment>
     <fragment
         android:id="@+id/privateChatFragmentRoom"
-        android:name="com.volkankelleci.petsocialclub.chatpart.PrivateChatFragment"
+        android:name="com.volkankelleci.petsocialclub.privatemessage.PrivateChatFragment"
         android:label="fragment_private_chat_room"
         tools:layout="@layout/fragment_private_chat_room" >
         <argument

@@ -1,16 +1,9 @@
-package com.volkankelleci.petsocialclub.chatpart
+package com.volkankelleci.petsocialclub.privatemessage
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,23 +12,17 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.volkankelleci.petsocialclub.R
-import com.volkankelleci.petsocialclub.adapter.PmRoomAdapter
-import com.volkankelleci.petsocialclub.adapter.PrivateMessageListAdapter
 import com.volkankelleci.petsocialclub.databinding.FragmentPrivateChatRoomBinding
-import com.volkankelleci.petsocialclub.util.PrivateMessage
 import com.volkankelleci.petsocialclub.util.Util.auth
 import com.volkankelleci.petsocialclub.util.Util.database
 import kotlinx.android.synthetic.main.fragment_private_chat_room.*
-import kotlinx.android.synthetic.main.fragment_private_message_list.*
-import kotlinx.android.synthetic.main.fragment_user_chat.*
 
 
 class PrivateChatFragment : Fragment() {
     private var _binding:FragmentPrivateChatRoomBinding?=null
     private val binding get()=_binding!!
-    private lateinit var adapter:PmRoomAdapter
-    var user=ArrayList<PrivateMessage>()
+    private lateinit var adapter: PmRoomAdapter
+    var user=ArrayList<PrivateMessageDataBase>()
     val layoutManager = LinearLayoutManager(activity)
     private lateinit var firestore: FirebaseFirestore
 
@@ -126,7 +113,7 @@ class PrivateChatFragment : Fragment() {
                                 val privateChatUserEmail = document.get("PrivateChatUserEmail").toString()
                                 val privateChatUserDate = document.get("userDate").toString()
                                 val privateChatToUUID = document.get("toUUID").toString()
-                                val downloadInfos =PrivateMessage(privateMessageUserText,privateChatUserUUID,privateChatToUUID,privateChatUserDate,privateChatUserEmail)
+                                val downloadInfos = PrivateMessageDataBase(privateMessageUserText,privateChatUserUUID,privateChatToUUID,privateChatUserDate,privateChatUserEmail)
                                 user.add(downloadInfos)
                                 adapter.privateChats=user
 

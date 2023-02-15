@@ -1,25 +1,14 @@
-package com.volkankelleci.petsocialclub.adapter
+package com.volkankelleci.petsocialclub.privatemessage
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.NotificationCompat
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.Timestamp
-import com.google.type.Date
 import com.volkankelleci.petsocialclub.R
-import com.volkankelleci.petsocialclub.util.PrivateMessage
 import com.volkankelleci.petsocialclub.util.Util.auth
-import com.volkankelleci.petsocialclub.util.Util.database
-import kotlinx.android.synthetic.main.chat_list_raw.view.*
-import kotlinx.android.synthetic.main.pm_answer_room.view.*
-import kotlinx.android.synthetic.main.pm_raw.view.*
 import kotlinx.android.synthetic.main.pm_raw.view.privateMessageChatTV
-import kotlinx.android.synthetic.main.private_chat_raw.view.*
-import kotlinx.android.synthetic.main.recycler_raw.view.*
-import java.text.SimpleDateFormat
 
 
 class PmRoomAdapter(): RecyclerView.Adapter<PmRoomAdapter.PmRoomAdapterViewHolder>() {
@@ -30,18 +19,18 @@ class PmRoomAdapter(): RecyclerView.Adapter<PmRoomAdapter.PmRoomAdapterViewHolde
 
     }
 
-    private val diffutil = object : DiffUtil.ItemCallback<PrivateMessage>() {
+    private val diffutil = object : DiffUtil.ItemCallback<PrivateMessageDataBase>() {
 
-        override fun areItemsTheSame(oldItem: PrivateMessage, newItem: PrivateMessage): Boolean {
+        override fun areItemsTheSame(oldItem: PrivateMessageDataBase, newItem: PrivateMessageDataBase): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: PrivateMessage, newItem: PrivateMessage): Boolean {
+        override fun areContentsTheSame(oldItem: PrivateMessageDataBase, newItem: PrivateMessageDataBase): Boolean {
             return oldItem == newItem
         }
     }
     private val recyclerDiff = AsyncListDiffer(this, diffutil)
-    var privateChats: List<PrivateMessage>
+    var privateChats: List<PrivateMessageDataBase>
         get() = recyclerDiff.currentList
         set(value) = recyclerDiff.submitList(value)
 

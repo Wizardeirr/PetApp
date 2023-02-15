@@ -4,13 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.transition.Hold
 import com.volkankelleci.petsocialclub.R
-import com.volkankelleci.petsocialclub.util.PrivateMessage
-import com.volkankelleci.petsocialclub.util.UserInfo
+import com.volkankelleci.petsocialclub.privatemessage.PrivateMessageDataBase
 import kotlinx.android.synthetic.main.chat_list_raw.view.*
 
-class PrivateMessageListAdapter(var userMessage:ArrayList<PrivateMessage>): RecyclerView.Adapter<PrivateMessageListAdapter.PrivateMessageListFragmentPart>() {
+class PrivateMessageListAdapter(var userMessage:ArrayList<PrivateMessageDataBase>): RecyclerView.Adapter<PrivateMessageListAdapter.PrivateMessageListFragmentPart>() {
     class PrivateMessageListFragmentPart(itemView: View):RecyclerView.ViewHolder(itemView) {
 
     }
