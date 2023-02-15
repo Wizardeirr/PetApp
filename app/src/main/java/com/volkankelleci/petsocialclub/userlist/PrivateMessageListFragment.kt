@@ -1,4 +1,4 @@
-package com.volkankelleci.petsocialclub
+package com.volkankelleci.petsocialclub.userlist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.Query
-import com.volkankelleci.petsocialclub.adapter.PrivateMessageListAdapter
+import com.volkankelleci.petsocialclub.R
 import com.volkankelleci.petsocialclub.databinding.FragmentPrivateMessageListBinding
 import com.volkankelleci.petsocialclub.privatemessage.PrivateMessageDataBase
 import com.volkankelleci.petsocialclub.util.Util
@@ -40,7 +40,7 @@ class PrivateMessageListFragment: Fragment(R.layout.fragment_private_message_lis
 
         val layoutManager=LinearLayoutManager(activity)
         userChatPartRV.layoutManager=layoutManager
-        adapter=PrivateMessageListAdapter(userMessage)
+        adapter= PrivateMessageListAdapter(userMessage)
         userChatPartRV.adapter=adapter
 
         takesInputs()

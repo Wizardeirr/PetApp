@@ -1,4 +1,4 @@
-package com.volkankelleci.petsocialclub.adapter
+package com.volkankelleci.petsocialclub.userlist
 
 import android.view.LayoutInflater
 import android.view.View

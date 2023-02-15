@@ -99,7 +99,7 @@
         tools:layout="@layout/fragment_user_profile_menu" />
     <fragment
         android:id="@+id/privateMessageListFragment"
-        android:name="com.volkankelleci.petsocialclub.PrivateMessageListFragment"
+        android:name="com.volkankelleci.petsocialclub.userlist.PrivateMessageListFragment"
         android:label="fragment_private_message_list"
         tools:layout="@layout/fragment_private_message_list" >
         <action
