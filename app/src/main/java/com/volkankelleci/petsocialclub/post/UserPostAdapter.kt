@@ -1,12 +1,10 @@
-package com.volkankelleci.petsocialclub.adapter
+package com.volkankelleci.petsocialclub.post
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.volkankelleci.petsocialclub.R
-import com.volkankelleci.petsocialclub.doneviews.UsersHomeFragmentDirections
 import com.volkankelleci.petsocialclub.util.Post
 import com.volkankelleci.petsocialclub.util.UserInfo
 import com.volkankelleci.petsocialclub.util.Util.createPlaceHolder

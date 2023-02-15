@@ -1,4 +1,4 @@
-package com.volkankelleci.petsocialclub.doneviews
+package com.volkankelleci.petsocialclub.post
 
 import android.os.Bundle
 import android.view.*
@@ -8,13 +8,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.google.firebase.ktx.Firebase
 import com.volkankelleci.petsocialclub.R
-import com.volkankelleci.petsocialclub.adapter.UserPostAdapter
 import com.volkankelleci.petsocialclub.databinding.FragmentUsersHomeBinding
 import com.volkankelleci.petsocialclub.util.Post
 import com.volkankelleci.petsocialclub.util.UserInfo
-import com.volkankelleci.petsocialclub.util.Util
 import com.volkankelleci.petsocialclub.util.Util.auth
 import kotlinx.android.synthetic.main.fragment_users_home.*
 
