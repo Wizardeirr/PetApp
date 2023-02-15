@@ -1,4 +1,4 @@
-package com.volkankelleci.petsocialclub.adapter
+package com.volkankelleci.petsocialclub.chatroom
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +10,6 @@ import com.volkankelleci.petsocialclub.R
 import com.volkankelleci.petsocialclub.util.ChatData
 import com.volkankelleci.petsocialclub.util.Util.auth
 import kotlinx.android.synthetic.main.chat_recycler_raw.view.*
-import java.text.SimpleDateFormat
 
 
 class ChatRecyclerAdapter() : RecyclerView.Adapter<ChatRecyclerAdapter.ChatRecyclerViewHolder>() {
