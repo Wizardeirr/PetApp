@@ -1,4 +1,4 @@
-package com.volkankelleci.petsocialclub.adapter
+package com.volkankelleci.petsocialclub.userlist
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +9,7 @@ import com.volkankelleci.petsocialclub.R
 import com.volkankelleci.petsocialclub.chatpart.ChatRoomListFragmentDirections
 
 import com.volkankelleci.petsocialclub.privatemessage.PrivateMessageDataBase
-import com.volkankelleci.petsocialclub.util.UserInfo
+import com.volkankelleci.petsocialclub.data.UserInfo
 import com.volkankelleci.petsocialclub.util.Util
 import com.volkankelleci.petsocialclub.util.Util.downloadImageToRecycler
 import kotlinx.android.synthetic.main.private_chat_raw.view.*

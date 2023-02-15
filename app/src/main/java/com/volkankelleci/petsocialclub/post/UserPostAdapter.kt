@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.volkankelleci.petsocialclub.R
-import com.volkankelleci.petsocialclub.util.Post
-import com.volkankelleci.petsocialclub.util.UserInfo
+import com.volkankelleci.petsocialclub.data.Post
+import com.volkankelleci.petsocialclub.data.UserInfo
 import com.volkankelleci.petsocialclub.util.Util.createPlaceHolder
 import com.volkankelleci.petsocialclub.util.Util.downloadImageToRecycler
 import kotlinx.android.synthetic.main.recycler_raw.view.*

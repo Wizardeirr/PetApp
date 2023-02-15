@@ -10,8 +10,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.volkankelleci.petsocialclub.R
 import com.volkankelleci.petsocialclub.databinding.FragmentUsersHomeBinding
-import com.volkankelleci.petsocialclub.util.Post
-import com.volkankelleci.petsocialclub.util.UserInfo
+import com.volkankelleci.petsocialclub.data.Post
+import com.volkankelleci.petsocialclub.data.UserInfo
 import com.volkankelleci.petsocialclub.util.Util.auth
 import kotlinx.android.synthetic.main.fragment_users_home.*
 
@@ -143,7 +143,7 @@ class UsersHomeFragment : Fragment() {
                                 val petName = document.get("petName").toString()
                                 val pw = document.get("password").toString()
 
-                                val userInfo =UserInfo(uuid,usermail,userName,petName,userPP,pw)
+                                val userInfo = UserInfo(uuid,usermail,userName,petName,userPP,pw)
                                 pp.add(userInfo)
 
                             }
