@@ -69,7 +69,7 @@
         tools:layout="@layout/fragment_user_chat" />
     <fragment
         android:id="@+id/privateChatFragment"
-        android:name="com.volkankelleci.petsocialclub.chatpart.ChatRoomListFragment"
+        android:name="com.volkankelleci.petsocialclub.chatroomlist.ChatRoomListFragment"
         android:label="fragment_private_chat"
         tools:layout="@layout/fragment_private_chat" >
         <action
