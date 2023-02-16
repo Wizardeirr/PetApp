@@ -1,4 +1,4 @@
-package com.volkankelleci.petsocialclub.chatpart
+package com.volkankelleci.petsocialclub.chatroomlist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.volkankelleci.petsocialclub.userlist.PrivateChatAdapter
 import com.volkankelleci.petsocialclub.databinding.FragmentPrivateChatBinding
 import com.volkankelleci.petsocialclub.privatemessage.PrivateMessageDataBase
 import com.volkankelleci.petsocialclub.data.UserInfo

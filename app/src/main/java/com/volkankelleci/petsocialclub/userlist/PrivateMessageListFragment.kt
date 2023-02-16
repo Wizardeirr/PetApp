@@ -24,7 +24,6 @@ class PrivateMessageListFragment: Fragment(R.layout.fragment_private_message_lis
     val toUUID= arguments?.let {
         PrivateMessageListFragmentArgs.fromBundle(it).pp
     }
-
     val userUUID = Util.auth.currentUser!!.uid
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,11 +49,10 @@ class PrivateMessageListFragment: Fragment(R.layout.fragment_private_message_lis
             findNavController().navigate(action)
         }
 
-
     }
 
     fun takesInputs(){
-        database.collection("privateChatInfo/$userUUID/$toUUID").orderBy("userDate",Query.Direction.ASCENDING)
+        database.collection("privateChatInfo/$toUUID/${Util.auth.currentUser!!.uid}")
             .addSnapshotListener { value, error ->
                 if (error != null) {
                 } else
@@ -63,7 +61,7 @@ class PrivateMessageListFragment: Fragment(R.layout.fragment_private_message_lis
                             val documents = value.documents
                             userMessage.clear()
                             for (document in documents) {
-                                document.get("privateChatInfo")
+                                document.get("privateChatInfo/$toUUID/${Util.auth.currentUser!!.uid}")
                                 val privateMessageUserText = document.get("userText").toString()
                                 val privateChatUserUUID = document.get("PrivateChatUserUUID").toString()
                                 val privateChatUserEmail = document.get("PrivateChatUserEmail").toString()
