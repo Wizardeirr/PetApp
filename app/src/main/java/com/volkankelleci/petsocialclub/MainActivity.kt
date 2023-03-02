@@ -3,10 +3,8 @@ package com.volkankelleci.petsocialclub
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -18,8 +16,15 @@ class MainActivity : AppCompatActivity() {
         //when i click to any editText window will be move to upside with view
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
+        //we are hiding to ActionBar for splash screen
         supportActionBar?.hide()
-        fragmentContainerView.visibility= View.INVISIBLE
+        // for splash screen how much second will stop during activity open
+        Handler().postDelayed({
+        val intent=Intent(this@MainActivity,MainActivity2::class.java)
+            startActivity(intent)
+
+        },3000)
+
             }
         }
 
