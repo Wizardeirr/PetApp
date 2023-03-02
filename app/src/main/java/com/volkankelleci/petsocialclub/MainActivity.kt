@@ -21,9 +21,7 @@ class MainActivity : AppCompatActivity() {
         // for splash screen how much second will stop during activity open
         Handler().postDelayed({
         val intent=Intent(this@MainActivity,MainActivity2::class.java)
-            startActivity(intent)
-
-        },3000)
+            startActivity(intent)},2000)
 
             }
         }
