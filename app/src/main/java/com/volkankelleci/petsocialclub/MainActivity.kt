@@ -15,16 +15,6 @@ class MainActivity : AppCompatActivity() {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
 
-                Handler().postDelayed(Runnable { //This method will be executed once the timer is over
-                    // Start your app main activity
-                    val i = Intent(this@MainActivity, MainActivity::class.java)
-                    startActivity(i)
-                    // close this activity
-                    finish()
-                }, 3000)
+        supportActionBar?.hide()
             }
         }
-
-    }
-
-}
