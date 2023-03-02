@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity() {
         //when i click to any editText window will be move to upside with view
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
+        supportActionBar?.hide()
+        fragmentContainerView.visibility= View.INVISIBLE
             }
         }
 
