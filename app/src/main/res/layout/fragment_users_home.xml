@@ -24,6 +24,8 @@
         android:id="@+id/usersHomeFragmentRecycler"
         android:layout_width="401dp"
         android:layout_height="588dp"
+        android:padding="5dp"
+        android:layout_margin="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

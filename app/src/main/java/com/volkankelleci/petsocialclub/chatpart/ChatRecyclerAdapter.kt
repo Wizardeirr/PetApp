@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.volkankelleci.petsocialclub.R
 import com.volkankelleci.petsocialclub.data.ChatData
+import com.volkankelleci.petsocialclub.data.UserInfo
 import com.volkankelleci.petsocialclub.util.Util.auth
 import kotlinx.android.synthetic.main.chat_recycler_raw.view.*
 
@@ -15,8 +16,8 @@ import kotlinx.android.synthetic.main.chat_recycler_raw.view.*
 class ChatRecyclerAdapter() : RecyclerView.Adapter<ChatRecyclerAdapter.ChatRecyclerViewHolder>() {
     private val WRITER_USER = 1
     private val ANSWER_USER = 2
-    class ChatRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    }
+    class ChatRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
     private val diffutil = object : DiffUtil.ItemCallback<ChatData>() {
         override fun areItemsTheSame(oldItem: ChatData, newItem: ChatData): Boolean {
             return oldItem == newItem
@@ -52,7 +53,8 @@ class ChatRecyclerAdapter() : RecyclerView.Adapter<ChatRecyclerAdapter.ChatRecyc
     override fun onBindViewHolder(holder: ChatRecyclerViewHolder, position: Int) {
 
 
-        holder.itemView.chatTV.text="${chats.get(position).chatUser}:${chats.get(position).chatText}"
+        holder.itemView.chatTV.text=chats.get(position).chatText
+
 
 
     }

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.volkankelleci.petsocialclub.databinding.FragmentUserProfileMenuBinding
 import com.volkankelleci.petsocialclub.data.UserInfo
 import com.volkankelleci.petsocialclub.util.Util
@@ -45,6 +46,7 @@ class UserProfileMenuFragment : Fragment() {
         Util.database.collection("userProfileInfo")
             .addSnapshotListener { value, error ->
                 if (error != null) {
+                    Toast.makeText(activity, "Wrong", Toast.LENGTH_SHORT).show()
                 } else
                     if (value != null) {
                         if (value.isEmpty == false) {

@@ -1,5 +1,6 @@
 package com.volkankelleci.petsocialclub.chatpart
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -15,6 +15,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.volkankelleci.petsocialclub.databinding.FragmentUserChatBinding
 import com.volkankelleci.petsocialclub.data.ChatData
+import com.volkankelleci.petsocialclub.data.UserInfo
 import com.volkankelleci.petsocialclub.util.Util.auth
 import kotlinx.android.synthetic.main.fragment_user_chat.*
 import kotlin.collections.ArrayList
@@ -28,6 +29,8 @@ class GeneralChatRoom : Fragment() {
     private lateinit var adapter: ChatRecyclerAdapter
     private lateinit var firestore: FirebaseFirestore
     var chats = ArrayList<ChatData>()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         firestore = Firebase.firestore
@@ -42,10 +45,11 @@ class GeneralChatRoom : Fragment() {
         getActivity()?.setTitle("Chat Room")
         return view
     }
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        downForNewMessage.visibility=View.INVISIBLE
+
         aboutVisibilityOfDownButton()
 
         //Showing message automatically in RecyclerView End
@@ -64,12 +68,13 @@ class GeneralChatRoom : Fragment() {
             }, 100)
         }
 
+
         // Adapter
         val layoutManager = LinearLayoutManager(activity)
         userChatRV.layoutManager = layoutManager
         adapter = ChatRecyclerAdapter()
         userChatRV.adapter = adapter
-        layoutManager.setStackFromEnd(true);
+        layoutManager.setStackFromEnd(true)
 
         //adding informations to Firebase what we want
         binding.sendButton.setOnClickListener {
@@ -86,7 +91,7 @@ class GeneralChatRoom : Fragment() {
 
 
             firestore.collection("Chats").add(chatDataMap).addOnSuccessListener {
-                scrollToBottom(userChatRV)
+                scrollToBottom()
                 binding.userChatText.setText("")
             }.addOnFailureListener {
                 Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
@@ -129,7 +134,7 @@ class GeneralChatRoom : Fragment() {
 
     }
 
-    private fun scrollToBottom(recyclerView: RecyclerView) {
+    private fun scrollToBottom() {
         // scroll to last item to get the view of last item
         val layoutManager = userChatRV.layoutManager as LinearLayoutManager?
         val adapter = userChatRV.adapter
@@ -148,6 +153,5 @@ class GeneralChatRoom : Fragment() {
             userChatRV.scrollToPosition(userChatRV.adapter!!.itemCount -1)
         }
     }
-
 
 }
