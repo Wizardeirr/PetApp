@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -49,6 +50,20 @@ class GeneralChatRoom : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        userChatRV.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy>10&& downForNewMessage.isShown){
+                    downForNewMessage.visibility=View.INVISIBLE
+                }
+                if(dy <-10 && !downForNewMessage.isShown){
+                    downForNewMessage.visibility=View.VISIBLE
+                }
+                if (!userChatRV.canScrollVertically(-1)){
+                    downForNewMessage.visibility=View.VISIBLE
+                }
+            }
+        })
 
         aboutVisibilityOfDownButton()
 
@@ -81,8 +96,6 @@ class GeneralChatRoom : Fragment() {
             val gUserChatText = userChatText.text.toString()
             val gUser = auth.currentUser?.email.toString()
             val gdate = FieldValue.serverTimestamp()
-
-
 
             val chatDataMap = HashMap<String, Any>()
             chatDataMap.put("chatGText", gUserChatText)
@@ -142,9 +155,11 @@ class GeneralChatRoom : Fragment() {
         layoutManager!!.scrollToPositionWithOffset(lastItemPosition, 0)
         userChatRV.post { // then scroll to specific offset
             val target = layoutManager.findViewByPosition(lastItemPosition)
+
             if (target != null) {
                 val offset = userChatRV.measuredHeight - target.measuredHeight
                 layoutManager.scrollToPositionWithOffset(lastItemPosition, offset)
+                downForNewMessage.visibility=View.VISIBLE
             }
         }
     }
