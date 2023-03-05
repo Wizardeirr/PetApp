@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.Query
 import com.volkankelleci.petsocialclub.R
+import com.volkankelleci.petsocialclub.data.LastMessageDataBase
 import com.volkankelleci.petsocialclub.data.UserInfo
 import com.volkankelleci.petsocialclub.databinding.FragmentPrivateMessageListBinding
 import com.volkankelleci.petsocialclub.data.PrivateMessageDataBase
@@ -21,12 +22,9 @@ import kotlinx.android.synthetic.main.fragment_private_message_list.*
 class PrivateMessageListFragment: Fragment(R.layout.fragment_private_message_list) {
     private  var _binding:FragmentPrivateMessageListBinding?=null
     private val binding get() =_binding!!
-    var userMessage=ArrayList<PrivateMessageDataBase>()
+    var userMessage=ArrayList<LastMessageDataBase>()
     private lateinit var adapter: PrivateMessageListAdapter
 
-    val toUUID= arguments?.let {
-        PrivateMessageListFragmentArgs.fromBundle(it).pp
-    }
     val userUUID = Util.auth.currentUser!!.uid
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,7 +42,7 @@ class PrivateMessageListFragment: Fragment(R.layout.fragment_private_message_lis
         userChatPartRV.layoutManager=layoutManager
         adapter= PrivateMessageListAdapter(userMessage)
         userChatPartRV.adapter=adapter
-
+        takeChatWindows()
 
 
         fabForPM.setOnClickListener{
@@ -55,7 +53,7 @@ class PrivateMessageListFragment: Fragment(R.layout.fragment_private_message_lis
 
     }
     private fun takeChatWindows(){
-        database.collection("privateChatInfo/$toUUID").orderBy("userDate",Query.Direction.DESCENDING)
+        database.collection("latestMessage/$userUUID")
             .addSnapshotListener { value, error ->
                 if (error != null) {
                     Toast.makeText(activity, "WRONG", Toast.LENGTH_SHORT).show()
@@ -65,13 +63,13 @@ class PrivateMessageListFragment: Fragment(R.layout.fragment_private_message_lis
                             val documents = value.documents
                             userMessage.clear()
                             for (document in documents) {
-                                document.get("privateChatInfo")
+                                document.get("latestMessage")
                                 val privateMessageUserText = document.get("userText").toString()
                                 val privateChatUserUUID = document.get("PrivateChatUserUUID").toString()
                                 val privateChatUserEmail = document.get("PrivateChatUserEmail").toString()
                                 val privateChatUserDate = document.get("userDate").toString()
                                 val privateChatToUUID = document.get("toUUID").toString()
-                                val downloadInfos = PrivateMessageDataBase(privateMessageUserText,privateChatUserUUID,privateChatToUUID,privateChatUserDate,privateChatUserEmail)
+                                val downloadInfos = LastMessageDataBase(privateMessageUserText,privateChatUserUUID,privateChatToUUID,privateChatUserDate,privateChatUserEmail)
                                 userMessage.add(downloadInfos)
                                 adapter.userChatWindow=userMessage
 
