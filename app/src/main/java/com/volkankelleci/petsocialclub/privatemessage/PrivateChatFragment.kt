@@ -120,16 +120,36 @@ class PrivateChatFragment : Fragment() {
                                 user.add(downloadInfos)
                                 adapter.privateChats=user
 
-                                if (adapter.privateChats==user){
-                                    privateMessageRV.scrollToPosition(privateMessageRV.adapter!!.itemCount -1)
-                                }
-
 
                             }
-                            adapter.notifyDataSetChanged()
+
                         }
                     }
             }
+
+        val userUUID = auth.currentUser!!.uid
+        database.collection("/latest-messages/$userUUID/$toUUID")   .addSnapshotListener { value, error ->
+            if (error != null) {
+                Toast.makeText(activity, "WRONG", Toast.LENGTH_SHORT).show()
+            } else
+                if (value != null) {
+                    if (value.isEmpty == false) {
+                        val documents = value.documents
+                        for (document in documents) {
+                            document.get("latest-messages")
+                            val privateMessageUserText = document.get("userText").toString()
+                            val privateChatUserUUID = document.get("PrivateChatUserUUID").toString()
+                            val privateChatUserEmail = document.get("PrivateChatUserEmail").toString()
+                            val privateChatUserDate = document.get("userDate").toString()
+                            val privateChatToUUID = document.get("toUUID").toString()
+                            val downloadInfos = PrivateMessageDataBase(privateMessageUserText,privateChatUserUUID,privateChatToUUID,privateChatUserDate,privateChatUserEmail)
+                            user.add(downloadInfos)
+                        }
+
+                    }
+                }
+        }
+
 
     }
     private fun scrollToBottom(recyclerView: RecyclerView) {

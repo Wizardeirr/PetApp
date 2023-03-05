@@ -44,7 +44,7 @@ class PrivateMessageListFragment: Fragment(R.layout.fragment_private_message_lis
         userChatPartRV.layoutManager=layoutManager
         adapter= PrivateMessageListAdapter(userMessage)
         userChatPartRV.adapter=adapter
-        takeChatWindows()
+
 
 
         fabForPM.setOnClickListener{
@@ -55,7 +55,7 @@ class PrivateMessageListFragment: Fragment(R.layout.fragment_private_message_lis
 
     }
     private fun takeChatWindows(){
-        database.collection("privateChatInfo/$toUUID/${Util.auth.currentUser!!.uid}").orderBy("userDate",Query.Direction.DESCENDING)
+        database.collection("privateChatInfo/$toUUID").orderBy("userDate",Query.Direction.DESCENDING)
             .addSnapshotListener { value, error ->
                 if (error != null) {
                     Toast.makeText(activity, "WRONG", Toast.LENGTH_SHORT).show()
