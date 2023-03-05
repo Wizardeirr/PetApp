@@ -96,6 +96,14 @@ class PrivateChatFragment : Fragment() {
                 scrollToBottom(privateMessageRV)
                 binding.privateMessageET.setText("")
             }
+            firestore.collection("latestMessage/$userUUID/$toUUID").add(userInfoMap).addOnSuccessListener {
+                scrollToBottom(privateMessageRV)
+                binding.privateMessageET.setText("")
+            }
+            firestore.collection("latestMessage/$toUUID/$userUUID").add(userInfoMap).addOnSuccessListener {
+                scrollToBottom(privateMessageRV)
+                binding.privateMessageET.setText("")
+            }
         }
         val toUUID= arguments?.let {
             PrivateChatFragmentArgs.fromBundle(it).pp
@@ -127,28 +135,7 @@ class PrivateChatFragment : Fragment() {
                     }
             }
 
-        val userUUID = auth.currentUser!!.uid
-        database.collection("/latest-messages/$userUUID/$toUUID")   .addSnapshotListener { value, error ->
-            if (error != null) {
-                Toast.makeText(activity, "WRONG", Toast.LENGTH_SHORT).show()
-            } else
-                if (value != null) {
-                    if (value.isEmpty == false) {
-                        val documents = value.documents
-                        for (document in documents) {
-                            document.get("latest-messages")
-                            val privateMessageUserText = document.get("userText").toString()
-                            val privateChatUserUUID = document.get("PrivateChatUserUUID").toString()
-                            val privateChatUserEmail = document.get("PrivateChatUserEmail").toString()
-                            val privateChatUserDate = document.get("userDate").toString()
-                            val privateChatToUUID = document.get("toUUID").toString()
-                            val downloadInfos = PrivateMessageDataBase(privateMessageUserText,privateChatUserUUID,privateChatToUUID,privateChatUserDate,privateChatUserEmail)
-                            user.add(downloadInfos)
-                        }
 
-                    }
-                }
-        }
 
 
     }
