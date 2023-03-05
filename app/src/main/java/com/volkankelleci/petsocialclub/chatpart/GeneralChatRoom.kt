@@ -50,19 +50,25 @@ class GeneralChatRoom : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        downForNewMessage.visibility=View.INVISIBLE
+
+        downForNewMessage.setOnClickListener{
+            scrollToBottom()
+        }
+
         userChatRV.addOnScrollListener(object : RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                if (dy>10&& downForNewMessage.isShown){
+
+                if (dy > 10 && downForNewMessage.isShown) {
                     downForNewMessage.visibility=View.INVISIBLE
                 }
                 if(dy <-10 && !downForNewMessage.isShown){
                     downForNewMessage.visibility=View.VISIBLE
                 }
-                if (!userChatRV.canScrollVertically(-1)){
+                if (!userChatRV.canScrollVertically(-1)&&!userChatRV.canScrollVertically(+1)){
                     downForNewMessage.visibility=View.VISIBLE
                 }
+
             }
         })
 
