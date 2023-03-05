@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.volkankelleci.petsocialclub.R
+import com.volkankelleci.petsocialclub.data.PrivateMessageDataBase
 import com.volkankelleci.petsocialclub.util.Util.auth
 import kotlinx.android.synthetic.main.pm_raw.view.privateMessageChatTV
 

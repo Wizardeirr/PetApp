@@ -3,11 +3,12 @@ package com.volkankelleci.petsocialclub.chatroomlist
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.volkankelleci.petsocialclub.R
 
-import com.volkankelleci.petsocialclub.privatemessage.PrivateMessageDataBase
+import com.volkankelleci.petsocialclub.data.PrivateMessageDataBase
 import com.volkankelleci.petsocialclub.data.UserInfo
 import com.volkankelleci.petsocialclub.util.Util
 import com.volkankelleci.petsocialclub.util.Util.downloadImageToRecycler
@@ -39,6 +40,11 @@ class PrivateChatAdapter(
         // navigate part
         holder.itemView.userList.setOnClickListener {
             val action =ChatRoomListFragmentDirections.actionPrivateChatFragmentToPrivateChatFragmentRoom(userList.get(position).userName, userList.get(position).uuid)
+            val action2 =ChatRoomListFragmentDirections.actionPrivateChatFragmentToPrivateMessageListFragment(userList.get(position).userName, userList.get(position).uuid)
+
+            action2.apply {
+                println("HELLO WORLD")
+            }
             Navigation.findNavController(it).navigate(action)
         }
 

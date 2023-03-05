@@ -1,4 +1,4 @@
-package com.volkankelleci.petsocialclub.privatemessage
+package com.volkankelleci.petsocialclub.data
 
 class PrivateMessageDataBase(
     var message:String,

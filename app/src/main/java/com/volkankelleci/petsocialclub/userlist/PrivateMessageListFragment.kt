@@ -4,15 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.Query
 import com.volkankelleci.petsocialclub.R
+import com.volkankelleci.petsocialclub.data.UserInfo
 import com.volkankelleci.petsocialclub.databinding.FragmentPrivateMessageListBinding
-import com.volkankelleci.petsocialclub.privatemessage.PrivateMessageDataBase
+import com.volkankelleci.petsocialclub.data.PrivateMessageDataBase
 import com.volkankelleci.petsocialclub.util.Util
 import com.volkankelleci.petsocialclub.util.Util.database
+import kotlinx.android.synthetic.main.fragment_private_chat_room.*
 import kotlinx.android.synthetic.main.fragment_private_message_list.*
 
 class PrivateMessageListFragment: Fragment(R.layout.fragment_private_message_list) {
@@ -41,27 +44,28 @@ class PrivateMessageListFragment: Fragment(R.layout.fragment_private_message_lis
         userChatPartRV.layoutManager=layoutManager
         adapter= PrivateMessageListAdapter(userMessage)
         userChatPartRV.adapter=adapter
+        takeChatWindows()
 
-        takesInputs()
 
         fabForPM.setOnClickListener{
             val action=PrivateMessageListFragmentDirections.actionPrivateMessageListFragmentToPrivateChatFragment()
             findNavController().navigate(action)
         }
 
-    }
 
-    fun takesInputs(){
-        database.collection("privateChatInfo/$toUUID/${Util.auth.currentUser!!.uid}")
+    }
+    private fun takeChatWindows(){
+        database.collection("privateChatInfo/$toUUID/${Util.auth.currentUser!!.uid}").orderBy("userDate",Query.Direction.DESCENDING)
             .addSnapshotListener { value, error ->
                 if (error != null) {
+                    Toast.makeText(activity, "WRONG", Toast.LENGTH_SHORT).show()
                 } else
                     if (value != null) {
                         if (value.isEmpty == false) {
                             val documents = value.documents
                             userMessage.clear()
                             for (document in documents) {
-                                document.get("privateChatInfo/$toUUID/${Util.auth.currentUser!!.uid}")
+                                document.get("privateChatInfo")
                                 val privateMessageUserText = document.get("userText").toString()
                                 val privateChatUserUUID = document.get("PrivateChatUserUUID").toString()
                                 val privateChatUserEmail = document.get("PrivateChatUserEmail").toString()
@@ -69,15 +73,17 @@ class PrivateMessageListFragment: Fragment(R.layout.fragment_private_message_lis
                                 val privateChatToUUID = document.get("toUUID").toString()
                                 val downloadInfos = PrivateMessageDataBase(privateMessageUserText,privateChatUserUUID,privateChatToUUID,privateChatUserDate,privateChatUserEmail)
                                 userMessage.add(downloadInfos)
-                                adapter.userMessage=userMessage
+                                adapter.userChatWindow=userMessage
 
                             }
                             adapter.notifyDataSetChanged()
                         }
                     }
             }
-
     }
+
+
+
 
 
 }

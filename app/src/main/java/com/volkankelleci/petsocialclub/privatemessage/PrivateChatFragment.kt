@@ -13,6 +13,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.volkankelleci.petsocialclub.data.PrivateMessageDataBase
 import com.volkankelleci.petsocialclub.databinding.FragmentPrivateChatRoomBinding
 import com.volkankelleci.petsocialclub.util.Util.auth
 import com.volkankelleci.petsocialclub.util.Util.database
@@ -145,9 +146,7 @@ class PrivateChatFragment : Fragment() {
             }
         }
     }
-    private fun recyclerPosition(){
-        privateMessageRV.post(Runnable { privateMessageRV.smoothScrollToPosition(adapter.itemCount - 1) })
-    }
+
 
 
 
