@@ -18,6 +18,7 @@ import com.volkankelleci.petsocialclub.databinding.FragmentPrivateChatRoomBindin
 import com.volkankelleci.petsocialclub.util.Util.auth
 import com.volkankelleci.petsocialclub.util.Util.database
 import kotlinx.android.synthetic.main.fragment_private_chat_room.*
+import kotlinx.android.synthetic.main.fragment_user_chat.*
 
 
 class PrivateChatFragment : Fragment() {
@@ -61,11 +62,28 @@ class PrivateChatFragment : Fragment() {
 
         }
 
+
         //defination to Main RV
         privateMessageRV.layoutManager = layoutManager
         adapter = PmRoomAdapter()
         privateMessageRV.adapter = adapter
-        // describe for second RV
+        // scroll listener for show any button when i switch to upside
+        privateMessageRV.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                if (dy > 10 && downForNewMessageForPM.isShown) {
+                    downForNewMessageForPM.visibility=View.INVISIBLE
+                }
+                if(dy <-10 && !downForNewMessageForPM.isShown){
+                    downForNewMessageForPM.visibility=View.VISIBLE
+                }
+                if (!userChatRV.canScrollVertically(-1)&&!userChatRV.canScrollVertically(+1)){
+                    downForNewMessageForPM.visibility=View.VISIBLE
+                }
+
+            }
+        })
 
 
         val new=arguments?.let {
