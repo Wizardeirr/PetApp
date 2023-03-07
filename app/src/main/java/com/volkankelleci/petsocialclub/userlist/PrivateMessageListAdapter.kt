@@ -25,8 +25,9 @@ class PrivateMessageListAdapter(var userChatWindow: ArrayList<LastMessageDataBas
     }
 
     override fun onBindViewHolder(holder: PrivateMessageListFragmentPart, position: Int) {
-        holder.itemView.userNameForChat.text=userChatWindow[position].lastMessage
-
+        holder.itemView.userNameForChat.text=userChatWindow.get(position).lastMessage
+        holder.itemView.lastMessage.text=userChatWindow.get(position).lastMessagechatUser
+        holder.itemView.timerMessage.text=userChatWindow.get(position).lastMessagetimestamp
 
 
     }
