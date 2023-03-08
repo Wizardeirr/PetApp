@@ -79,7 +79,7 @@ class PrivateChatFragment : Fragment() {
                 if(dy <-10 && !downForNewMessageForPM.isShown){
                     downForNewMessageForPM.visibility=View.VISIBLE
                 }
-                if (!privateMessageRV.canScrollVertically(-1)&&!privateMessageRV.canScrollVertically(+1)){
+                if (!privateMessageRV.canScrollVertically(-1)){
                     downForNewMessageForPM.visibility=View.VISIBLE
                 }
 
