@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".privatemessage.PrivateChatFragment"
     android:layout_marginBottom="1dp">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/privateMessageRV"
-        android:layout_width="400dp"
-        android:layout_height="530dp"
+        android:layout_width="401dp"
+        android:layout_height="539dp"
         android:layout_gravity="center"
         android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,25 +19,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/privateMessageET"
-        android:layout_width="350dp"
-        android:layout_height="48dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="4dp"
-        android:background="@color/white"
-        android:ems="10"
-        android:hint="Message"
-        android:inputType="textCapSentences|textMultiLine"
-        android:maxWidth="240dp"
-        android:maxLength="2000"
-        android:maxLines="6"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.177"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/privateMessageRV"
-        app:layout_constraintVertical_bias="0.818" />
+
+    <LinearLayout
+        android:layout_width="351dp"
+        android:layout_height="50dp"
+        tools:layout_editor_absoluteX="5dp"
+        tools:layout_editor_absoluteY="546dp">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/app_icon"
+            android:id="@+id/sendPictureInPrivateMessage">
+
+        </ImageView>
+
+        <EditText
+            android:id="@+id/privateMessageET"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:ems="10"
+            android:hint="Message"
+            android:inputType="textCapSentences|textMultiLine"
+            android:maxWidth="240dp"
+            android:maxLength="2000"
+            android:maxLines="6"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.177"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/privateMessageRV"
+            app:layout_constraintVertical_bias="0.818" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/privateMessageSendButton"
