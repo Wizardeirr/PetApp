@@ -10,7 +10,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/privateMessageRV"
-        android:layout_width="401dp"
+        android:layout_width="395dp"
         android:layout_height="539dp"
         android:layout_gravity="center"
         android:layout_marginTop="4dp"
@@ -21,16 +21,20 @@
 
 
     <LinearLayout
-        android:layout_width="351dp"
-        android:layout_height="50dp"
-        tools:layout_editor_absoluteX="5dp"
-        tools:layout_editor_absoluteY="546dp">
+        android:layout_width="350dp"
+        android:layout_height="35dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/privateMessageSendButton"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/privateMessageRV"
+        app:layout_constraintVertical_bias="0.625">
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@mipmap/app_icon"
-            android:id="@+id/sendPictureInPrivateMessage">
+            android:id="@+id/sendPictureInPrivateMessage"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:src="@mipmap/app_icon">
 
         </ImageView>
 
@@ -55,16 +59,19 @@
 
     <ImageView
         android:id="@+id/privateMessageSendButton"
-        android:layout_width="51dp"
-        android:layout_height="49dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="6dp"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="#FF5454"
         android:src="@drawable/send_icon"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/privateMessageRV"
+        app:layout_constraintVertical_bias="0.875">
 
     </ImageView>
+
     <ImageView
         android:id="@+id/downForNewMessageForPM"
         android:layout_width="37dp"
