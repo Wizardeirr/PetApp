@@ -72,6 +72,7 @@ class PrivateChatFragment : Fragment() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
+                downForNewMessageForPM.visibility=View.INVISIBLE
                 if (dy > 10 && downForNewMessageForPM.isShown) {
                     downForNewMessageForPM.visibility=View.INVISIBLE
                 }
