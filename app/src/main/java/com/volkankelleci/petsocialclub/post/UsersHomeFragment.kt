@@ -46,8 +46,11 @@ class UsersHomeFragment : Fragment() {
 
         //swipe refresh layout
 
-        binding.swipeToRefresh.setOnRefreshListener {
-            Toast.makeText(activity, "YOYOYO", Toast.LENGTH_SHORT).show()
+        binding.swipeRefreshLayout.setOnRefreshListener {
+
+            takesData()
+            takesPP()
+            swipeRefreshLayout.isRefreshing = false
         }
 
 
