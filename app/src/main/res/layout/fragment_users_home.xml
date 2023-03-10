@@ -33,12 +33,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipe"
         android:layout_width="50dp"
-        android:layout_height="50dp"
-
-        tools:layout_editor_absoluteX="180dp"
-        tools:layout_editor_absoluteY="7dp">
+        android:layout_height="30dp">
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
