@@ -147,7 +147,6 @@ class PrivateChatFragment : Fragment() {
                                 user.add(downloadInfos)
                                 adapter.privateChats=user
 
-
                             }
 
                         }

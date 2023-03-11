@@ -22,8 +22,10 @@ import com.volkankelleci.petsocialclub.data.PrivateMessageDataBase
 import com.volkankelleci.petsocialclub.privatemessage.PrivateChatFragmentArgs
 import com.volkankelleci.petsocialclub.util.Util
 import com.volkankelleci.petsocialclub.util.Util.database
+import com.volkankelleci.petsocialclub.util.Util.downloadImageToRecycler
 import kotlinx.android.synthetic.main.fragment_private_chat_room.*
 import kotlinx.android.synthetic.main.fragment_private_message_list.*
+import kotlinx.android.synthetic.main.fragment_user_profile_menu.*
 
 class PrivateMessageListFragment: Fragment(R.layout.fragment_private_message_list) {
     private  var _binding:FragmentPrivateMessageListBinding?=null
@@ -53,7 +55,28 @@ class PrivateMessageListFragment: Fragment(R.layout.fragment_private_message_lis
         adapter= PrivateMessageListAdapter(userMessage)
         userChatPartRV.adapter=adapter
 
+        Util.database.collection("latestMessage")
+            .addSnapshotListener { value, error ->
+                if (error != null) {
+                    Toast.makeText(activity, "Wrong", Toast.LENGTH_SHORT).show()
+                } else
+                    if (value != null) {
+                        if (value.isEmpty == false) {
+                            val documents = value.documents
+                            userMessage.clear()
+                            for (document in documents) {
+                                document.get("latestMessage")
+                                val privateMessageUserText = document.get("userText").toString()
+                                val privateChatUserUUID = document.get("PrivateChatUserUUID").toString()
+                                val privateChatUserEmail = document.get("PrivateChatUserEmail").toString()
+                                val privateChatUserDate = document.get("userDate").toString()
+                                val privateChatToUUID = document.get("toUUID").toString()
+                                val downloadLastMessageInfos = LastMessageDataBase(privateMessageUserText,privateChatUserUUID,privateChatToUUID,privateChatUserDate,privateChatUserEmail)
+                                userMessage.add(downloadLastMessageInfos)
 
+                            }
+                        }
+                    }
+            }
     }
-
 }
