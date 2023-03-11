@@ -10,7 +10,7 @@ import com.volkankelleci.petsocialclub.data.PrivateMessageDataBase
 import com.volkankelleci.petsocialclub.data.UserInfo
 import kotlinx.android.synthetic.main.chat_list_raw.view.*
 
-class PrivateMessageListAdapter(var userChatWindow: ArrayList<LastMessageDataBase>): RecyclerView.Adapter<PrivateMessageListAdapter.PrivateMessageListFragmentPart>() {
+class PrivateMessageListAdapter(val userChatWindow: ArrayList<LastMessageDataBase>): RecyclerView.Adapter<PrivateMessageListAdapter.PrivateMessageListFragmentPart>() {
     class PrivateMessageListFragmentPart(itemView: View):RecyclerView.ViewHolder(itemView) {
 
     }

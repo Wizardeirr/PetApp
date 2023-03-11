@@ -55,7 +55,7 @@ class PrivateMessageListFragment: Fragment(R.layout.fragment_private_message_lis
         adapter= PrivateMessageListAdapter(userMessage)
         userChatPartRV.adapter=adapter
 
-        Util.database.collection("latestMessage")
+        Util.database.collection("userProfileInfo")
             .addSnapshotListener { value, error ->
                 if (error != null) {
                     Toast.makeText(activity, "Wrong", Toast.LENGTH_SHORT).show()
@@ -65,7 +65,7 @@ class PrivateMessageListFragment: Fragment(R.layout.fragment_private_message_lis
                             val documents = value.documents
                             userMessage.clear()
                             for (document in documents) {
-                                document.get("latestMessage")
+                                document.get("userProfileInfo")
                                 val privateMessageUserText = document.get("userText").toString()
                                 val privateChatUserUUID = document.get("PrivateChatUserUUID").toString()
                                 val privateChatUserEmail = document.get("PrivateChatUserEmail").toString()
@@ -74,8 +74,10 @@ class PrivateMessageListFragment: Fragment(R.layout.fragment_private_message_lis
                                 val downloadLastMessageInfos = LastMessageDataBase(privateMessageUserText,privateChatUserUUID,privateChatToUUID,privateChatUserDate,privateChatUserEmail)
                                 userMessage.add(downloadLastMessageInfos)
 
+
                             }
                         }
+                        adapter.notifyDataSetChanged()
                     }
             }
     }
