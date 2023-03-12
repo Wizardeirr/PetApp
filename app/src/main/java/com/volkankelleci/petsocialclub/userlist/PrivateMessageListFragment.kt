@@ -1,5 +1,6 @@
 package com.volkankelleci.petsocialclub.userlist
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +22,7 @@ import com.volkankelleci.petsocialclub.databinding.FragmentPrivateMessageListBin
 import com.volkankelleci.petsocialclub.data.PrivateMessageDataBase
 import com.volkankelleci.petsocialclub.privatemessage.PrivateChatFragmentArgs
 import com.volkankelleci.petsocialclub.util.Util
+import com.volkankelleci.petsocialclub.util.Util.auth
 import com.volkankelleci.petsocialclub.util.Util.database
 import com.volkankelleci.petsocialclub.util.Util.downloadImageToRecycler
 import kotlinx.android.synthetic.main.fragment_private_chat_room.*
@@ -30,8 +32,12 @@ import kotlinx.android.synthetic.main.fragment_user_profile_menu.*
 class PrivateMessageListFragment: Fragment(R.layout.fragment_private_message_list) {
     private  var _binding:FragmentPrivateMessageListBinding?=null
     private val binding get() =_binding!!
-    var userMessage=ArrayList<LastMessageDataBase>()
+    var userMessage=ArrayList<PrivateMessageDataBase>()
     private lateinit var adapter: PrivateMessageListAdapter
+    val toUUID= arguments?.let {
+        PrivateMessageListFragmentArgs.fromBundle(it).pp
+    }
+    val currentUserID=auth.currentUser!!.uid
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,6 +48,7 @@ class PrivateMessageListFragment: Fragment(R.layout.fragment_private_message_lis
         val view=binding.root
         return view
     }
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -55,10 +62,9 @@ class PrivateMessageListFragment: Fragment(R.layout.fragment_private_message_lis
         adapter= PrivateMessageListAdapter(userMessage)
         userChatPartRV.adapter=adapter
 
-        val toUUID= arguments?.let {
-            PrivateChatFragmentArgs.fromBundle(it).pp
-        }
-        Util.database.collection("latestMessage$toUUID/${Util.auth.currentUser!!.uid}")
+
+
+        database.collection("privateChatInfo/$currentUserID/$toUUID")
             .addSnapshotListener { value, error ->
                 if (error != null) {
                     Toast.makeText(activity, "Wrong", Toast.LENGTH_SHORT).show()
@@ -66,21 +72,25 @@ class PrivateMessageListFragment: Fragment(R.layout.fragment_private_message_lis
                     if (value != null) {
                         if (value.isEmpty == false) {
                             val documents = value.documents
-                            userMessage.clear()
+
                             for (document in documents) {
-                                document.get("latestMessage")
+                                document.get("privateChatInfo")
                                 val privateMessageUserText = document.get("userText").toString()
                                 val privateChatUserUUID = document.get("PrivateChatUserUUID").toString()
                                 val privateChatUserEmail = document.get("PrivateChatUserEmail").toString()
                                 val privateChatUserDate = document.get("userDate").toString()
                                 val privateChatToUUID = document.get("toUUID").toString()
-                                val downloadLastMessageInfos = LastMessageDataBase(privateMessageUserText,privateChatUserUUID,privateChatToUUID,privateChatUserDate,privateChatUserEmail)
+                                val downloadLastMessageInfos = PrivateMessageDataBase(privateMessageUserText,
+                                    privateChatUserUUID,
+                                    privateChatToUUID,
+                                    privateChatUserDate,
+                                    privateChatUserEmail)
                                 userMessage.add(downloadLastMessageInfos)
 
 
                             }
                         }
-                        adapter.notifyDataSetChanged()
+
                     }
             }
     }

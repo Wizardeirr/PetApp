@@ -10,10 +10,8 @@ import com.volkankelleci.petsocialclub.data.PrivateMessageDataBase
 import com.volkankelleci.petsocialclub.data.UserInfo
 import kotlinx.android.synthetic.main.chat_list_raw.view.*
 
-class PrivateMessageListAdapter(val userChatWindow: ArrayList<LastMessageDataBase>): RecyclerView.Adapter<PrivateMessageListAdapter.PrivateMessageListFragmentPart>() {
-    class PrivateMessageListFragmentPart(itemView: View):RecyclerView.ViewHolder(itemView) {
-
-    }
+class PrivateMessageListAdapter(val userChatWindow: ArrayList<PrivateMessageDataBase>): RecyclerView.Adapter<PrivateMessageListAdapter.PrivateMessageListFragmentPart>() {
+    class PrivateMessageListFragmentPart(itemView: View):RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -25,9 +23,8 @@ class PrivateMessageListAdapter(val userChatWindow: ArrayList<LastMessageDataBas
     }
 
     override fun onBindViewHolder(holder: PrivateMessageListFragmentPart, position: Int) {
-        holder.itemView.userNameForChat.text=userChatWindow.get(position).lastMessage
-        holder.itemView.lastMessage.text=userChatWindow.get(position).lastMessagechatUser
-        holder.itemView.timerMessage.text=userChatWindow.get(position).lastMessagetimestamp
+        holder.itemView.userNameForLastMessageList.text=userChatWindow[position].message
+        holder.itemView.lastMessageForLastMessageList.text=userChatWindow[position].chatUser
 
 
     }
