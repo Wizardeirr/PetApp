@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_private_chat_room.*
 import kotlinx.android.synthetic.main.fragment_user_chat.*
 
 
-class PrivateChatFragment : Fragment() {
+open class PrivateChatFragment : Fragment() {
     private var _binding:FragmentPrivateChatRoomBinding?=null
     private val binding get()=_binding!!
     private lateinit var adapter: PmRoomAdapter
@@ -116,37 +116,7 @@ class PrivateChatFragment : Fragment() {
                 binding.privateMessageET.setText("")
             }
         }
-        val toUUID= arguments?.let {
-            PrivateChatFragmentArgs.fromBundle(it).pp
-        }
-        database.collection("privateChatInfo/$toUUID/${auth.currentUser!!.uid}").orderBy("userDate",Query.Direction.ASCENDING)
-            .addSnapshotListener { value, error ->
-                if (error != null) {
-                    Toast.makeText(activity, "WRONG", Toast.LENGTH_SHORT).show()
-                } else
-                    if (value != null) {
-                        if (value.isEmpty == false) {
-                            val documents = value.documents
-                            user.clear()
-                            for (document in documents) {
-                                document.get("privateChatInfo")
-                                val privateMessageUserText = document.get("userText").toString()
-                                val privateChatUserUUID = document.get("PrivateChatUserUUID").toString()
-                                val privateChatUserEmail = document.get("PrivateChatUserEmail").toString()
-                                val privateChatUserDate = document.get("userDate").toString()
-                                val privateChatToUUID = document.get("toUUID").toString()
-                                val downloadInfos = PrivateMessageDataBase(privateMessageUserText,privateChatUserUUID,privateChatToUUID,privateChatUserDate,privateChatUserEmail)
-                                user.add(downloadInfos)
-                                adapter.privateChats=user
-
-                            }
-
-                        }
-                    }
-            }
-
-
-
+        takesDataForList()
 
     }
     private fun scrollToBottom(recyclerView: RecyclerView) {
@@ -163,7 +133,36 @@ class PrivateChatFragment : Fragment() {
             }
         }
     }
+private fun takesDataForList(){
+    val toUUID= arguments?.let {
+        PrivateChatFragmentArgs.fromBundle(it).pp
+    }
+    database.collection("privateChatInfo/$toUUID/${auth.currentUser!!.uid}").orderBy("userDate",Query.Direction.ASCENDING)
+        .addSnapshotListener { value, error ->
+            if (error != null) {
+                Toast.makeText(activity, "WRONG", Toast.LENGTH_SHORT).show()
+            } else
+                if (value != null) {
+                    if (value.isEmpty == false) {
+                        val documents = value.documents
+                        user.clear()
+                        for (document in documents) {
+                            document.get("privateChatInfo")
+                            val privateMessageUserText = document.get("userText").toString()
+                            val privateChatUserUUID = document.get("PrivateChatUserUUID").toString()
+                            val privateChatUserEmail = document.get("PrivateChatUserEmail").toString()
+                            val privateChatUserDate = document.get("userDate").toString()
+                            val privateChatToUUID = document.get("toUUID").toString()
+                            val downloadInfos = PrivateMessageDataBase(privateMessageUserText,privateChatUserUUID,privateChatToUUID,privateChatUserDate,privateChatUserEmail)
+                            user.add(downloadInfos)
+                            adapter.privateChats=user
 
+                        }
+
+                    }
+                }
+        }
+}
 
 
 

@@ -20,6 +20,7 @@ import com.volkankelleci.petsocialclub.data.LastMessageDataBase
 import com.volkankelleci.petsocialclub.data.UserInfo
 import com.volkankelleci.petsocialclub.databinding.FragmentPrivateMessageListBinding
 import com.volkankelleci.petsocialclub.data.PrivateMessageDataBase
+import com.volkankelleci.petsocialclub.privatemessage.PrivateChatFragment
 import com.volkankelleci.petsocialclub.privatemessage.PrivateChatFragmentArgs
 import com.volkankelleci.petsocialclub.util.Util
 import com.volkankelleci.petsocialclub.util.Util.auth
@@ -29,14 +30,11 @@ import kotlinx.android.synthetic.main.fragment_private_chat_room.*
 import kotlinx.android.synthetic.main.fragment_private_message_list.*
 import kotlinx.android.synthetic.main.fragment_user_profile_menu.*
 
-class PrivateMessageListFragment: Fragment(R.layout.fragment_private_message_list) {
+class PrivateMessageListFragment: Fragment() {
     private  var _binding:FragmentPrivateMessageListBinding?=null
     private val binding get() =_binding!!
     var userMessage=ArrayList<PrivateMessageDataBase>()
     private lateinit var adapter: PrivateMessageListAdapter
-    val toUUID= arguments?.let {
-        PrivateMessageListFragmentArgs.fromBundle(it).pp
-    }
     val currentUserID=auth.currentUser!!.uid
 
     override fun onCreateView(
@@ -62,36 +60,5 @@ class PrivateMessageListFragment: Fragment(R.layout.fragment_private_message_lis
         adapter= PrivateMessageListAdapter(userMessage)
         userChatPartRV.adapter=adapter
 
-
-
-        database.collection("privateChatInfo/$currentUserID/$toUUID")
-            .addSnapshotListener { value, error ->
-                if (error != null) {
-                    Toast.makeText(activity, "Wrong", Toast.LENGTH_SHORT).show()
-                } else
-                    if (value != null) {
-                        if (value.isEmpty == false) {
-                            val documents = value.documents
-
-                            for (document in documents) {
-                                document.get("privateChatInfo")
-                                val privateMessageUserText = document.get("userText").toString()
-                                val privateChatUserUUID = document.get("PrivateChatUserUUID").toString()
-                                val privateChatUserEmail = document.get("PrivateChatUserEmail").toString()
-                                val privateChatUserDate = document.get("userDate").toString()
-                                val privateChatToUUID = document.get("toUUID").toString()
-                                val downloadLastMessageInfos = PrivateMessageDataBase(privateMessageUserText,
-                                    privateChatUserUUID,
-                                    privateChatToUUID,
-                                    privateChatUserDate,
-                                    privateChatUserEmail)
-                                userMessage.add(downloadLastMessageInfos)
-
-
-                            }
-                        }
-
-                    }
-            }
     }
 }
